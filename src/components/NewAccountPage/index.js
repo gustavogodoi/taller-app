@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import LoginForm from '../LoginForm';
 
 class NewAccountPage extends Component {
-  Cancelar = e => {
+  Cancel = e => {
     e.preventDefault();
     this.props.history.push('/');
   };
 
-  Cadastrar = e => {
+  Register = e => {
     e.preventDefault();
     console.log('Cadastrar', e.target.email.value);
     //e.target.email.password
@@ -35,7 +35,7 @@ class NewAccountPage extends Component {
     const actions = [
       {
         text: 'Cancelar',
-        callback: this.Cancelar,
+        callback: this.Cancel,
       },
       {
         text: 'Cadastrar',
@@ -44,7 +44,7 @@ class NewAccountPage extends Component {
     return (
       <LoginForm
         description="Novo Cadastro"
-        submit={this.Cadastrar}
+        submit={this.Register}
         fields={fields}
         actions={actions}
       />

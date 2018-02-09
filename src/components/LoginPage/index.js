@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from '../LoginForm';
 
 class LoginPage extends Component {
-  NovaConta = e => {
+  NewAccountRedirect = e => {
     e.preventDefault();
     this.props.history.push('/nova-conta');
   };
@@ -29,7 +29,7 @@ class LoginPage extends Component {
     const actions = [
       {
         text: 'Nova Conta',
-        callback: this.NovaConta,
+        callback: this.NewAccountRedirect,
       },
       {
         text: 'Login',
