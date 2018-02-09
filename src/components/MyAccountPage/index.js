@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import Menu from '../Menu';
 import LoginForm from '../LoginForm';
+import './MyAccountPage.css';
 
-class NewAccountPage extends Component {
+class MyAccountPage extends Component {
   Cancel = e => {
     e.preventDefault();
-    this.props.history.push('/');
+    this.props.history.push('/dashboard');
   };
 
-  Register = e => {
+  UpdateAccount = e => {
     e.preventDefault();
-    console.log('Cadastrar', e.target.email.value);
+    console.log('Update', e.target.email.value);
     //e.target.email.password
     //e.target.email.confirm
   };
@@ -42,14 +44,19 @@ class NewAccountPage extends Component {
       },
     ];
     return (
-      <LoginForm
-        description="Novo Cadastro"
-        submit={this.Register}
-        fields={fields}
-        actions={actions}
-      />
+      <div>
+        <Menu />
+        <div className="myaccount-wrapper">
+          <LoginForm
+            description="Minha Conta"
+            submit={this.UpdateAccount}
+            fields={fields}
+            actions={actions}
+          />
+        </div>
+      </div>
     );
   }
 }
 
-export default NewAccountPage;
+export default MyAccountPage;
