@@ -1,9 +1,9 @@
 import React from 'react';
 import './LoginForm.css';
 
-const LoginForm = ({ description, fields, actions }) => (
+const LoginForm = ({ description, fields, actions, submit }) => (
   <div className="form-wrapper">
-    <form className="form-form">
+    <form className="form-form" onSubmit={submit}>
       <div className="form-description">{description}</div>
       <div className="form-form__body">
         {fields.map(field => (

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import LoginForm from '../LoginForm';
-import './LoginPage.css';
 
 class LoginPage extends Component {
   NovaConta = e => {
     e.preventDefault();
-    console.log('Nova Conta');
+    this.props.history.push('/nova-conta');
   };
 
   Login = e => {
     e.preventDefault();
-    console.log('Login');
+    console.log('Login', e.target.login.value);
+    //e.target.password.value
   };
 
   render() {
@@ -18,7 +18,7 @@ class LoginPage extends Component {
       {
         name: 'login',
         text: 'Login',
-        type: 'text',
+        type: 'email',
       },
       {
         name: 'password',
@@ -33,12 +33,12 @@ class LoginPage extends Component {
       },
       {
         text: 'Login',
-        callback: this.Login,
       },
     ];
     return (
       <LoginForm
         description="Efetue seu login para acessar o sistema"
+        submit={this.Login}
         fields={fields}
         actions={actions}
       />
