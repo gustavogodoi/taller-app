@@ -1,0 +1,49 @@
+.login-wrapper {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  width: 350px;
+  font-size: 13px;
+  background-color: lightgoldenrodyellow;
+  border: 3px solid gray;
+  padding: 25px 30px;
+}
+
+.login-description {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-form__body {
+  width: 300px;
+}
+
+.login-fields {
+  margin-bottom: 15px;
+}
+
+.login-label {
+  display: inline-block;
+  width: 65px;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.login-input {
+  width: 215px;
+}
+
+.login-action {
+  padding-left: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-button {
+  width: 100px;
+}
