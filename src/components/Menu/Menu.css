@@ -1,0 +1,19 @@
+.menu {
+  display: flex;
+  padding: 50px 20px;
+  justify-content: space-around;
+  font-size: 13px;
+}
+
+.menu__item {
+  background: url('https://tallerwebsolutions.github.io/teste-tecnico/images/dashboard/u51.png');
+  min-width: 200px;
+  height: 40px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
