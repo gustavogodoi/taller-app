@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import NewAccountPage from '../NewAccountPage';
+import DashboardPage from '../DashboardPage';
 import LoginPage from '../LoginPage';
 import './App.css';
 
@@ -10,6 +11,7 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path="/nova-conta" component={NewAccountPage} />
+          <Route exact path="/dashboard" component={DashboardPage} />
           <Route path="/" component={LoginPage} />
         </Switch>
       </div>
