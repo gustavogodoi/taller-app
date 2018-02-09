@@ -1,34 +1,47 @@
 import React, { Component } from 'react';
+import LoginForm from '../LoginForm';
 import './LoginPage.css';
 
 class LoginPage extends Component {
+  NovaConta = e => {
+    e.preventDefault();
+    console.log('Nova Conta');
+  };
+
+  Login = e => {
+    e.preventDefault();
+    console.log('Login');
+  };
+
   render() {
+    const fields = [
+      {
+        name: 'login',
+        text: 'Login',
+        type: 'text',
+      },
+      {
+        name: 'password',
+        text: 'Senha',
+        type: 'password',
+      },
+    ];
+    const actions = [
+      {
+        text: 'Nova Conta',
+        callback: this.NovaConta,
+      },
+      {
+        text: 'Login',
+        callback: this.Login,
+      },
+    ];
     return (
-      <div className="login-wrapper">
-        <form className="login-form">
-          <div className="login-description">
-            Efetue seu login para acessar o sistema
-          </div>
-          <div className="login-form__body">
-            <div className="login-fields">
-              <label className="login-label" htmlFor="login">
-                Login:
-              </label>
-              <input className="login-input" name="login" type="text" />
-            </div>
-            <div className="login-fields">
-              <label className="login-label" htmlFor="password">
-                Password:
-              </label>
-              <input className="login-input" name="password" type="password" />
-            </div>
-            <div className="login-action">
-              <button className="login-button">Nova Conta</button>
-              <button className="login-button">Login</button>
-            </div>
-          </div>
-        </form>
-      </div>
+      <LoginForm
+        description="Efetue seu login para acessar o sistema"
+        fields={fields}
+        actions={actions}
+      />
     );
   }
 }
