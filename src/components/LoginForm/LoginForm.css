@@ -24,6 +24,7 @@
 
 .form-fields {
   margin-bottom: 15px;
+  display: flex;
 }
 
 .form-label {
@@ -39,6 +40,10 @@
 
 .form-input {
   width: 215px;
+}
+
+.form-input--small {
+  width: 50px;
 }
 
 .form-action {
