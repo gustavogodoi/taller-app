@@ -11,6 +11,8 @@ class LoginPage extends Component {
     e.preventDefault();
     console.log('Login', e.target.login.value);
     //e.target.password.value
+
+    this.props.history.push('/dashboard');
   };
 
   render() {
