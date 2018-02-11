@@ -30,6 +30,7 @@ table th {
   background-color: lightgoldenrodyellow;
   font-weight: normal;
   height: 36px;
+  min-width: 144px;
 }
 
 table td {
