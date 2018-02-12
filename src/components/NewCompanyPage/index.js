@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { withFirebase } from 'react-redux-firebase';
 import Menu from '../Menu';
 
 class NewCompanyPage extends Component {
   NewCompany = e => {
     e.preventDefault();
-    console.log(
-      'NewCompany',
-      e.target.nome_fantasia.value,
-      e.target.cnpj.value
-    );
 
-    this.props.history.push('/dashboard');
+    this.props.firebase.push('companies', {
+      nome_fantasia: e.target.nome_fantasia.value,
+      cnpj: e.target.cnpj.value,
+      pedidos: 0,
+    });
+
+    //this.props.history.push('/dashboard');
   };
 
   render() {
@@ -45,4 +47,4 @@ class NewCompanyPage extends Component {
   }
 }
 
-export default NewCompanyPage;
+export default withFirebase(NewCompanyPage);
