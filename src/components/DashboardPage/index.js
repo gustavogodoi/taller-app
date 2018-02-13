@@ -38,8 +38,8 @@ class DashboardPage extends Component {
                       {!empresa.pedidos ? (
                         'Nenhum'
                       ) : (
-                        <Link to={`/meus-pedidos/${empresa.id}`}>
-                          {empresa.pedidos.lenght}
+                        <Link to={`/meus-pedidos/${key}`}>
+                          {Object.keys(empresa.pedidos).length}
                         </Link>
                       )}
                     </td>
