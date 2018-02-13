@@ -9,10 +9,10 @@ class NewCompanyPage extends Component {
     this.props.firebase.push('companies', {
       nome_fantasia: e.target.nome_fantasia.value,
       cnpj: e.target.cnpj.value,
-      pedidos: 0,
+      pedidos: [],
     });
 
-    //this.props.history.push('/dashboard');
+    this.props.history.push('/dashboard');
   };
 
   render() {

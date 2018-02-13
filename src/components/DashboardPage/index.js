@@ -35,11 +35,11 @@ class DashboardPage extends Component {
                     <td>{empresa.nome_fantasia}</td>
                     <td>{empresa.cnpj}</td>
                     <td>
-                      {empresa.pedidos === 0 ? (
+                      {!empresa.pedidos ? (
                         'Nenhum'
                       ) : (
                         <Link to={`/meus-pedidos/${empresa.id}`}>
-                          {empresa.pedidos}
+                          {empresa.pedidos.lenght}
                         </Link>
                       )}
                     </td>
