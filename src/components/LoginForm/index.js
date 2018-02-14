@@ -16,13 +16,13 @@ const LoginForm = ({ description, fields, actions, submit }) => (
         ))}
         <div className="form-action">
           {actions.map(action => (
-            <button
+            <input
               key={action.text}
+              type={!action.type ? 'button' : action.type}
               className="form-button"
               onClick={action.callback}
-            >
-              {action.text}
-            </button>
+              value={action.text}
+            />
           ))}
         </div>
       </div>

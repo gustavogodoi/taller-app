@@ -13,17 +13,10 @@ class NewAccountPage extends Component {
     const { email, password, confirm } = e.target;
     e.preventDefault();
     if (!email.value) {
-      toast.error(
-        `Erro: O campo 'Email' é obrigatório.`,
-        {
-          position: toast.POSITION.TOP_CENTER,
-        }
-      );
-    } else if (
-      password.value &&
-      password.value === confirm.value
-    ) {
-
+      toast.error(`Erro: O campo 'Email' é obrigatório.`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (password.value && password.value === confirm.value) {
       this.props.firebase
         .createUser({
           email: email.value,
@@ -76,6 +69,7 @@ class NewAccountPage extends Component {
       },
       {
         text: 'Cadastrar',
+        type: 'submit',
       },
     ];
     return (

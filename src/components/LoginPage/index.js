@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withFirebase } from 'react-redux-firebase';
+import { toast, ToastContainer } from 'react-toastify';
 import LoginForm from '../LoginForm';
 
 class LoginPage extends Component {
@@ -9,10 +11,25 @@ class LoginPage extends Component {
 
   Login = e => {
     e.preventDefault();
-    console.log('Login', e.target.login.value);
-    //e.target.password.value
+    const { login, password } = e.target;
 
-    this.props.history.push('/dashboard');
+    this.props.firebase
+      .login({
+        email: login.value,
+        password: password.value,
+      })
+      .then(() => {
+        toast.success('Bem vindo!', {
+          position: toast.POSITION.TOP_CENTER,
+          onClose: () => this.props.history.push('/dashboard'),
+          autoClose: 1000,
+        });
+      })
+      .catch(e => {
+        toast.error(`Erro: Login ou Senha incorretos`, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
   };
 
   render() {
@@ -35,17 +52,21 @@ class LoginPage extends Component {
       },
       {
         text: 'Login',
+        type: 'submit',
       },
     ];
     return (
-      <LoginForm
-        description="Efetue seu login para acessar o sistema"
-        submit={this.Login}
-        fields={fields}
-        actions={actions}
-      />
+      <div>
+        <ToastContainer />
+        <LoginForm
+          description="Efetue seu login para acessar o sistema"
+          submit={this.Login}
+          fields={fields}
+          actions={actions}
+        />
+      </div>
     );
   }
 }
 
-export default LoginPage;
+export default withFirebase(LoginPage);
