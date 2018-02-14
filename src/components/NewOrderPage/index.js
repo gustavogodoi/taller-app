@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
+import { toast, ToastContainer } from 'react-toastify';
 import Menu from '../Menu';
 import './NewOrder.css';
 
@@ -14,22 +15,32 @@ class NewOrderPage extends Component {
       order: [],
     };
   }
+
   addItem = e => {
     e.preventDefault();
+    if (e.target.company.value === '0') {
+      toast.error(`Erro: Selecione uma Empresa`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (!e.target.qtd.value || e.target.product.value === '0') {
+      toast.error(`Erro: Selecione um Produto e a quantidade`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      const order = [...this.state.order];
+      order.push({
+        qtd: e.target.qtd.value,
+        product: e.target.product.value,
+      });
 
-    const order = [...this.state.order];
-    order.push({
-      qtd: e.target.qtd.value,
-      product: e.target.product.value,
-    });
+      this.setState({
+        order,
+        company: e.target.company.value,
+      });
 
-    this.setState({
-      order,
-      company: e.target.company.value,
-    });
-
-    e.target.qtd.value = null;
-    e.target.product.value = null;
+      e.target.qtd.value = null;
+      e.target.product.value = null;
+    }
   };
 
   removeItem = index => {
@@ -39,11 +50,17 @@ class NewOrderPage extends Component {
   };
 
   CloseOrder = () => {
-    this.props.firebase
-      .push(`companies/${this.state.company}/pedidos`, this.state.order)
-      .then(() => {
-        this.props.history.push('/dashboard');
+    if (!this.state.order.length) {
+      toast.error(`Erro: Pedido vazio`, {
+        position: toast.POSITION.TOP_CENTER,
       });
+    } else {
+      this.props.firebase
+        .push(`companies/${this.state.company}/pedidos`, this.state.order)
+        .then(() => {
+          this.props.history.push('/dashboard');
+        });
+    }
   };
 
   render() {
@@ -71,6 +88,7 @@ class NewOrderPage extends Component {
 
     return (
       <div>
+        <ToastContainer />
         <div>
           <Menu />
         </div>
@@ -78,14 +96,14 @@ class NewOrderPage extends Component {
         <form onSubmit={this.addItem}>
           <div className="form-fields">
             <select id="company">
-              <option>Selecione uma Empresa</option>
+              <option value={0}>Selecione uma Empresa</option>
               {selectCompanies}
             </select>
           </div>
           <div className="form-fields">
             <div>
               <select id="product">
-                <option>Selecione um Produto</option>
+                <option value={0}>Selecione um Produto</option>
                 {selectProducts}
               </select>
             </div>
