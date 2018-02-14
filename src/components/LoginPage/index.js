@@ -4,6 +4,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import LoginForm from '../LoginForm';
 
 class LoginPage extends Component {
+  componentWillMout() {
+    this.props.firebase.logout();
+  }
+
   NewAccountRedirect = e => {
     e.preventDefault();
     this.props.history.push('/nova-conta');
