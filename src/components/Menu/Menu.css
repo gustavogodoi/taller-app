@@ -1,13 +1,17 @@
 .menu {
   display: flex;
   padding: 50px 20px;
-  justify-content: space-around;
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1300px;
+  flex-wrap: wrap;
 }
 
 .menu__item {
-  background: url('https://tallerwebsolutions.github.io/teste-tecnico/images/dashboard/u51.png');
-  min-width: 200px;
+  /*background: url('https://tallerwebsolutions.github.io/teste-tecnico/images/dashboard/u51.png');*/
+  background-color: #ececec;
+  border: 1px solid #797979;
+  border-radius: 10px;
+  min-width: 160px;
   height: 40px;
   display: flex;
   text-align: center;
@@ -16,4 +20,5 @@
   cursor: pointer;
   text-decoration: none;
   color: black;
+  margin: 15px;
 }
