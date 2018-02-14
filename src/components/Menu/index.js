@@ -6,19 +6,40 @@ class Menu extends Component {
   render() {
     return (
       <div className="menu">
-        <NavLink to="/dashboard" className="menu__item">
+        <NavLink
+          to="/"
+          exact
+          className="menu__item"
+          activeClassName="menu__item--selected"
+        >
           Dashboard
         </NavLink>
-        <NavLink to="/nova-empresa" className="menu__item">
+        <NavLink
+          to="/nova-empresa"
+          className="menu__item"
+          activeClassName="menu__item--selected"
+        >
           Cadastrar nova empresa
         </NavLink>
-        <NavLink to="/novo-pedido" className="menu__item">
+        <NavLink
+          to="/novo-pedido"
+          className="menu__item"
+          activeClassName="menu__item--selected"
+        >
           Novo pedido
         </NavLink>
-        <NavLink to="/minha-conta" className="menu__item">
+        <NavLink
+          to="/minha-conta"
+          className="menu__item"
+          activeClassName="menu__item--selected"
+        >
           Minha conta
         </NavLink>
-        <NavLink to="/logout" className="menu__item">
+        <NavLink
+          to="/logout"
+          className="menu__item"
+          activeClassName="menu__item--selected"
+        >
           Sair
         </NavLink>
       </div>

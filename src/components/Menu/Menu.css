@@ -7,7 +7,6 @@
 }
 
 .menu__item {
-  /*background: url('https://tallerwebsolutions.github.io/teste-tecnico/images/dashboard/u51.png');*/
   background-color: #ececec;
   border: 1px solid #797979;
   border-radius: 10px;
@@ -21,4 +20,9 @@
   text-decoration: none;
   color: black;
   margin: 15px;
+}
+
+.menu__item--selected {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
