@@ -11,7 +11,11 @@ var firebaseConfig = {
   messagingSenderId: '459339265730',
 };
 
-const rrfConfig = { userProfile: 'users' };
+const rrfConfig = {
+  userProfile: 'users',
+  attachAuthIsReady: true,
+  firebaseStateName: 'firebase',
+};
 
 firebase.initializeApp(firebaseConfig);
 
