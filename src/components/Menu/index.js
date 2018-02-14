@@ -18,7 +18,7 @@ class Menu extends Component {
         <NavLink to="/minha-conta" className="menu__item">
           Minha conta
         </NavLink>
-        <NavLink to="/" className="menu__item">
+        <NavLink to="/logout" className="menu__item">
           Sair
         </NavLink>
       </div>

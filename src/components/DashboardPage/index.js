@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Menu from '../Menu';
 
 class DashboardPage extends Component {
   render() {
-    const minhasEmpresas = [
-      {
-        id: 1,
-        nome_fantasia: 'Druptec Soluções',
-        cnpj: '28.354.669/0001-09',
-        qtd_pedidos: 1,
-      },
-      {
-        id: 2,
-        nome_fantasia: 'PasquePag',
-        cnpj: '34.763.818/0001-88',
-        qtd_pedidos: 0,
-      },
-    ];
+    const minhasEmpresas = !isLoaded(this.props.companies)
+      ? []
+      : isEmpty(this.props.companies) ? [] : this.props.companies;
 
     return (
       <div>
@@ -36,21 +28,24 @@ class DashboardPage extends Component {
               </tr>
             </thead>
             <tbody>
-              {minhasEmpresas.map(empresa => (
-                <tr key={empresa.id}>
-                  <td>{empresa.nome_fantasia}</td>
-                  <td>{empresa.cnpj}</td>
-                  <td>
-                    {empresa.qtd_pedidos === 0 ? (
-                      'Nenhum'
-                    ) : (
-                      <Link to={`/meus-pedidos/${empresa.id}`}>
-                        {empresa.qtd_pedidos}
-                      </Link>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {Object.keys(minhasEmpresas).map((key, id) => {
+                const empresa = minhasEmpresas[key];
+                return (
+                  <tr key={id}>
+                    <td>{empresa.nome_fantasia}</td>
+                    <td>{empresa.cnpj}</td>
+                    <td>
+                      {!empresa.pedidos ? (
+                        'Nenhum'
+                      ) : (
+                        <Link to={`/meus-pedidos/${key}`}>
+                          {Object.keys(empresa.pedidos).length}
+                        </Link>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -59,4 +54,9 @@ class DashboardPage extends Component {
   }
 }
 
-export default DashboardPage;
+export default compose(
+  firebaseConnect(['companies']),
+  connect(state => ({
+    companies: state.firebase.data.companies,
+  }))
+)(DashboardPage);
