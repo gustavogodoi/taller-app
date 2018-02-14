@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded } from 'react-redux-firebase';
+import { toast, ToastContainer } from 'react-toastify';
 import Menu from '../Menu';
 
 class MyOrdersPage extends Component {
@@ -9,16 +10,14 @@ class MyOrdersPage extends Component {
     this.companyId = this.props.match.params.id;
   }
 
-  FilterOrder = e => {
-    e.preventDefault();
-    console.log('FilterOrder', e.target.cnpj.value);
-    // e.target.order.value
-  };
-
   CancelOrder = orderId => {
-    this.props.firebase.remove(
-      `companies/${this.companyId}/pedidos/${orderId}`
-    );
+    this.props.firebase
+      .remove(`companies/${this.companyId}/pedidos/${orderId}`)
+      .then(() => {
+        toast.success('Pedido Cancelado!', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
   };
 
   render() {
@@ -30,32 +29,15 @@ class MyOrdersPage extends Component {
       ? {}
       : this.props.companies[this.companyId].pedidos;
 
+    const companyName = this.props.companies[this.companyId].nome_fantasia;
+
     return (
       <div>
+        <ToastContainer />
         <div>
           <Menu />
         </div>
-        <h1>Meus pedidos - Empresa Druptec Soluções</h1>
-        <form onSubmit={this.FilterOrder}>
-          <div className="form-fields">
-            <div>
-              <label className="form-label" htmlFor="cnpj">
-                CNPJ:
-              </label>
-              <input className="form-input" id="cnpj" type="text" />
-            </div>
-            <div>
-              <label className="form-label" htmlFor="order">
-                Pedido:
-              </label>
-              <input className="form-input" id="order" type="text" />
-            </div>
-            <div>
-              <label className="form-label" htmlFor="filter" />
-              <button id="filter">Filtrar</button>
-            </div>
-          </div>
-        </form>
+        <h1>{`Meus pedidos - ${companyName}`}</h1>
         <div className="list-order">
           <table>
             <thead>
