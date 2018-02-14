@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from 'react-redux-firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import Menu from '../Menu';
-import { validarCNPJ } from '../Validation';
+import { validarCNPJ } from '../CNPJFunc';
 
 class NewCompanyPage extends Component {
   NewCompany = e => {

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import Menu from '../Menu';
+import { formatarCNPJ } from '../CNPJFunc';
 
 class DashboardPage extends Component {
   render() {
@@ -33,7 +34,7 @@ class DashboardPage extends Component {
                 return (
                   <tr key={id}>
                     <td>{empresa.nome_fantasia}</td>
-                    <td>{empresa.cnpj}</td>
+                    <td>{formatarCNPJ(empresa.cnpj)}</td>
                     <td>
                       {!empresa.pedidos ? (
                         'Nenhum'
