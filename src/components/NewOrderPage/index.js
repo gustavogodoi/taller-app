@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withFirebase, firebaseConnect, isLoaded } from 'react-redux-firebase';
+import { firebaseConnect, isLoaded } from 'react-redux-firebase';
 import Menu from '../Menu';
 import './NewOrder.css';
 
@@ -39,11 +39,11 @@ class NewOrderPage extends Component {
   };
 
   CloseOrder = () => {
-    this.props.firebase.push(
-      `companies/${this.state.company}/pedidos`,
-      this.state.order
-    );
-    this.props.history.push('/dashboard');
+    this.props.firebase
+      .push(`companies/${this.state.company}/pedidos`, this.state.order)
+      .then(() => {
+        this.props.history.push('/dashboard');
+      });
   };
 
   render() {
@@ -143,4 +143,4 @@ export default compose(
     companies: state.firebase.data.companies,
     products: state.firebase.data.products,
   }))
-)(withFirebase(NewOrderPage));
+)(NewOrderPage);
