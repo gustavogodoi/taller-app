@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
 import { withFirebase } from 'react-redux-firebase';
+import { toast, ToastContainer } from 'react-toastify';
 import Menu from '../Menu';
+import { validarCNPJ } from '../Validation';
 
 class NewCompanyPage extends Component {
   NewCompany = e => {
     e.preventDefault();
+    const { nome_fantasia } = e.target;
+    const cnpj = e.target.cnpj.value.replace(/[^\d]+/g, '');
 
-    this.props.firebase.push('companies', {
-      nome_fantasia: e.target.nome_fantasia.value,
-      cnpj: e.target.cnpj.value,
-      pedidos: [],
-    });
-
-    this.props.history.push('/dashboard');
+    if (!nome_fantasia.value) {
+      toast.error(`Erro: Nome inválido`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (!validarCNPJ(cnpj)) {
+      toast.error(`Erro: CNPJ inválido`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      this.props.firebase
+        .push('companies', {
+          nome_fantasia: nome_fantasia.value,
+          cnpj: cnpj,
+          pedidos: [],
+        })
+        .then(() => {
+          this.props.history.push('/dashboard');
+        });
+    }
   };
 
   render() {
     return (
       <div>
+        <ToastContainer />
         <div>
           <Menu />
         </div>
