@@ -6,14 +6,19 @@ import { toast, ToastContainer } from 'react-toastify';
 import Menu from '../Menu';
 
 class MyOrdersPage extends Component {
-  componentWillMount() {
-    this.companyId = this.props.match.params.id;
-  }
+  state = {
+    companyId: this.props.match.params.id,
+  };
 
   CancelOrder = orderId => {
     this.props.firebase
-      .remove(`companies/${this.companyId}/pedidos/${orderId}`)
+      .remove(`companies/${this.state.companyId}/pedidos/${orderId}`)
       .then(() => {
+        delete this.props.companies[this.state.companyId].pedidos[orderId];
+        // force the state to update and update the order list
+        this.setState({
+          companyId: this.state.companyId,
+        });
         toast.success('Pedido Cancelado!', {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -25,11 +30,12 @@ class MyOrdersPage extends Component {
       return <div>Loading...</div>;
     }
 
-    const orders = !this.props.companies[this.companyId].pedidos
+    const orders = !this.props.companies[this.state.companyId].pedidos
       ? {}
-      : this.props.companies[this.companyId].pedidos;
+      : this.props.companies[this.state.companyId].pedidos;
 
-    const companyName = this.props.companies[this.companyId].nome_fantasia;
+    const companyName = this.props.companies[this.state.companyId]
+      .nome_fantasia;
 
     return (
       <div>
@@ -68,6 +74,11 @@ class MyOrdersPage extends Component {
                   </tr>
                 );
               })}
+              {!Object.keys(orders).length && (
+                <tr>
+                  <td colSpan="3">Nenhum pedido encontrado</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
