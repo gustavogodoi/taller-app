@@ -55,9 +55,16 @@ class NewOrderPage extends Component {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
+      const company = this.props.companies[this.state.company];
+      const orders = Object.assign({}, company.pedidos);
+
       this.props.firebase
         .push(`companies/${this.state.company}/pedidos`, this.state.order)
-        .then(() => {
+        .then(fb => {
+          this.props.companies[this.state.company].pedidos = {
+            ...orders,
+            [fb.key]: this.state.order,
+          };
           this.props.history.push('/dashboard');
         });
     }
